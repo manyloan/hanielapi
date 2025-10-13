@@ -1,7 +1,9 @@
 package br.edu.infnet.hanielapi.config;
 
-import br.edu.infnet.hanielapi.model.Posicao;
-import br.edu.infnet.hanielapi.service.PosicaoService;
+import br.edu.infnet.hanielapi.model.Acao;
+import br.edu.infnet.hanielapi.model.Ativo;
+import br.edu.infnet.hanielapi.model.FundoImobiliario;
+import br.edu.infnet.hanielapi.service.AtivoService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -10,39 +12,39 @@ import org.springframework.util.ResourceUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
-@Component // Um outro Bean, responsavel para que o ApplicationRunner
+@Component
 public class DataLoader implements ApplicationRunner {
-    private final PosicaoService posicaoService;
 
-    public DataLoader(PosicaoService posicaoService) {
-        this.posicaoService = posicaoService;
+    private final AtivoService ativoService;
+
+    public DataLoader(AtivoService ativoService) {
+        this.ativoService = ativoService;
     }
-
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ResourceUtils.getFile("classpath:posicoes.txt")))) {
+        System.out.println("[DataLoader] -> Iniciando carga de dados do arquivo ativos.txt...");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(ResourceUtils.getFile("classpath:ativos.txt")))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
+                String tipo = dados[0];
+                Ativo ativo = null;
 
-                Posicao posicao = new Posicao(
-                    null,
-                    dados[0],
-                    Integer.parseInt(dados[1]),
-                    new BigDecimal(dados[2]),
-                    LocalDate.parse(dados[3])
-                );
+                if ("ACAO".equalsIgnoreCase(tipo)) {
+                    ativo = new Acao(null, dados[2], Integer.parseInt(dados[4]), new BigDecimal(dados[5]), dados[1], dados[3]);
+                } else if ("FII".equalsIgnoreCase(tipo)) {
+                    ativo = new FundoImobiliario(null, dados[2], Integer.parseInt(dados[4]), new BigDecimal(dados[5]), dados[1], dados[3]);
+                }
 
-                posicaoService.salvar(posicao);
+                if (ativo != null) {
+                    ativoService.salvar(ativo);
+                }
             }
         }
-
-        System.out.println("Dados carregados com sucesso!");
-
-        posicaoService.listarTodos().forEach(System.out::println);
+        System.out.println(">>> [DataLoader] Carga de dados finalizada. Confirmando:");
+        ativoService.listarTodos().forEach(System.out::println);
     }
-
 }

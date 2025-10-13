@@ -1,6 +1,6 @@
 package br.edu.infnet.hanielapi.service;
 
-import br.edu.infnet.hanielapi.model.Posicao;
+import br.edu.infnet.hanielapi.model.Ativo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,36 +11,36 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service // Anotação do spring para mostrar que essa classe é uma classe de servico. Se torna um Bean.
-public class PosicaoService implements CrudService<Posicao, Long> {
+public class AtivoService implements CrudService<Ativo, Long> {
     // Criar o banco de dados em memória como mostrado na aula 2, aquele esquema que parece um sqlite/memcached.
-    private final Map<Long, Posicao> posicoes = new ConcurrentHashMap<>();
+    private final Map<Long, Ativo> ativos = new ConcurrentHashMap<>();
 
     private final AtomicLong idCounter = new AtomicLong(1);
 
     @Override // Esse carinha aqui vai la no CrudService e sobrescreve o método que está lá, deixando o codigo mais limpo.
-    public List<Posicao> listarTodos() {
-        return new ArrayList<>(posicoes.values());
+    public List<Ativo> listarTodos() {
+        return new ArrayList<>(ativos.values());
     }
 
     @Override
-    public Optional<Posicao> buscarPorId(Long id) {
-        return Optional.ofNullable(posicoes.get(id));
+    public Optional<Ativo> buscarPorId(Long id) {
+        return Optional.ofNullable(ativos.get(id));
     }
 
     @Override
-    public Posicao salvar(Posicao posicao) {
-        if (posicao.getId() == null) {
+    public Ativo salvar(Ativo Ativo) {
+        if (Ativo.getId() == null) {
             long novoId = idCounter.getAndIncrement();
-            posicao.setId(novoId);
+            Ativo.setId(novoId);
         }
 
-        posicoes.put(posicao.getId(), posicao);
-        return posicao;
+        ativos.put(Ativo.getId(), Ativo);
+        return Ativo;
     }
 
     @Override
     public void excluir(Long id) {
-        posicoes.remove(id);
+        ativos.remove(id);
     }
 
 }

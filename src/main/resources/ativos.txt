@@ -1,0 +1,22 @@
+ACAO,PETR4,Petrobras,Petróleo,150,30.55
+FII,MXRF11,Maxi Renda,Papel,300,10.80
+ACAO,VALE3,Vale,Mineração,100,65.20
+FII,HGLG11,CSHG Logística,Logística,80,165.40
+ACAO,ITUB4,Itaú Unibanco,Financeiro,500,29.70
+ACAO,MGLU3,Magazine Luiza,Varejo,1200,2.15
+FII,KNCR11,Kinea Rendimentos,Papel,120,102.30
+ACAO,BBDC4,Bradesco,Financeiro,450,15.80
+FII,BCFF11,BTG Pactual FoF,Fundo de Fundos,200,9.10
+ACAO,ABEV3,Ambev,Bebidas,600,13.45
+ACAO,WEGE3,Weg,Bens de Capital,250,38.90
+FII,XPLG11,XP Log,Logística,95,110.00
+ACAO,B3SA3,B3,Serviços Financeiros,350,14.20
+FII,VISC11,Vinci Shopping,Shoppings,130,121.50
+ACAO,SUZB3,Suzano,Papel e Celulose,180,55.60
+ACAO,LREN3,Lojas Renner,Varejo,220,17.75
+FII,IRDM11,Iridium Recebíveis,Papel,250,8.40
+ACAO,ELET3,Eletrobras,Elétrico,160,42.80
+FII,HGRU11,CSHG Renda Urbana,Híbrido,75,135.25
+ACAO,BBAS3,Banco do Brasil,Financeiro,400,58.10
+ACAO,RADL3,Raia Drogasil,Farmacêutico,150,28.40
+ACAO,PRIO3,PetroRio,Petróleo,90,45.15
