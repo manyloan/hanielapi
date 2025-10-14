@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "0d03a3be-cfcb-48d7-887d-700f35c69a84",
+		"name": "hanielapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49093798",
+		"_collection_link": "https://haniel-loan-1228708.postman.co/workspace/Haniel-Loan-Hermida-Marotta-Sa-~f41e507a-7777-4e06-8173-59ab020802e3/collection/49093798-0d03a3be-cfcb-48d7-887d-700f35c69a84?action=share&source=collection_link&creator=49093798"
+	},
+	"item": [
+		{
+			"name": "Acoes",
+			"item": [
+				{
+					"name": "Listar Todas as Ações",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Ação Existente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Petrobras PN Alterada\",\r\n    \"quantidade\": 300,\r\n    \"precoMedio\": 32.00,\r\n    \"ticker\": \"PETR4\",\r\n    \"empresa\": {\r\n        \"nome\": \"Petróleo Brasileiro S.A.\",\r\n        \"setor\": \"Petróleo e Gás\",\r\n        \"cnpj\": \"33.000.167/0001-01\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/acoes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Ação",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Petrobras PN Alterada\",\r\n    \"quantidade\": 300,\r\n    \"precoMedio\": 32.00,\r\n    \"ticker\": \"PETR4\",\r\n    \"empresa\": {\r\n        \"nome\": \"Petróleo Brasileiro S.A.\",\r\n        \"setor\": \"Petróleo e Gás\",\r\n        \"cnpj\": \"33.000.167/0001-01\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/acoes/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Split Ação",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acoes/1/desdobrar?fator=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"1",
+								"desdobrar"
+							],
+							"query": [
+								{
+									"key": "fator",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

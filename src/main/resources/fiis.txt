@@ -1,0 +1,10 @@
+MXRF11,Maxi Renda FII,350,10.70,Papel,10.12
+HGLG11,CSHG Logística FII,90,166.20,Logística,158.40
+KNCR11,Kinea Rendimentos FII,150,103.00,Papel,102.10
+BCFF11,BTG Pactual FOF FII,220,9.15,Fundo de Fundos,8.98
+VISC11,Vinci Shopping FII,140,122.00,Shoppings,119.50
+XPLG11,XP Log FII,100,111.50,Logística,109.80
+IRDM11,Iridium Recebíveis FII,280,8.50,Papel,8.35
+HGRU11,CSHG Renda Urbana FII,85,136.00,Híbrido,133.70
+XPML11,XP Malls FII,110,115.30,Shoppings,112.60
+CPTS11,Capitania Securitizadora FII,260,8.80,Papel,8.71

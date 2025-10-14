@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 public class Acao extends Ativo {
     private String ticker;
-    private String setor;
+    private Empresa empresa;
 
-    public Acao(Long id, String nome, int quantidade, BigDecimal precoMedio, String ticker, String setor) {
+    public Acao(Long id, String nome, int quantidade, BigDecimal precoMedio, String ticker, Empresa empresa) {
         super(id, nome, quantidade, precoMedio);
         this.ticker = ticker;
-        this.setor = setor;
+        this.empresa = empresa;
     }
 
     @Override
@@ -29,8 +29,9 @@ public class Acao extends Ativo {
         return super.toString() +
                """
                Ticker:      %s
+               Empresa:     %s
                Setor:       %s
                --------------------------------
-               """.formatted(this.ticker, this.setor);
+               """.formatted(this.ticker, this.empresa.getNome(), this.empresa.getSetor());
     }
 }

@@ -12,11 +12,13 @@ import java.math.BigDecimal;
 public class FundoImobiliario extends Ativo {
     private String codigo;
     private String segmento;
+    private BigDecimal valorPatrimonialPorCota;
 
-    public FundoImobiliario(Long id, String nome, int quantidade, BigDecimal precoMedio, String codigo, String segmento) {
+    public FundoImobiliario(Long id, String nome, int quantidade, BigDecimal precoMedio, String codigo, String segmento, BigDecimal valorPatrimonialPorCota) {
         super(id, nome, quantidade, precoMedio);
         this.codigo = codigo;
         this.segmento = segmento;
+        this.valorPatrimonialPorCota = valorPatrimonialPorCota;
     }
 
     @Override
