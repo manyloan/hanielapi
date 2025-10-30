@@ -3,10 +3,11 @@ package br.edu.infnet.hanielapi.controller;
 import br.edu.infnet.hanielapi.controller.dto.UpdateValorPatrimonialRequest;
 import br.edu.infnet.hanielapi.model.FundoImobiliario;
 import br.edu.infnet.hanielapi.service.FundoImobiliarioService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,14 @@ public class FundoImobiliarioController {
     @PostMapping
     public ResponseEntity<FundoImobiliario> incluirFii(@RequestBody FundoImobiliario fii) {
         FundoImobiliario novoFii = fiiService.salvar(fii);
-        return new ResponseEntity<>(novoFii, HttpStatus.CREATED);
+        
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(novoFii.getId())
+                .toUri();
+                
+        return ResponseEntity.created(location).body(novoFii);
     }
 
     @PutMapping("/{id}")

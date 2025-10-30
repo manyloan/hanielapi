@@ -2,10 +2,11 @@ package br.edu.infnet.hanielapi.controller;
 
 import br.edu.infnet.hanielapi.model.Acao;
 import br.edu.infnet.hanielapi.service.AcaoService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,14 +27,21 @@ public class AcaoController {
     @GetMapping("/{id}")
     public ResponseEntity<Acao> buscarAcaoPorId(@PathVariable Long id) {
         return acaoService.buscarPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Acao> incluirAcao(@RequestBody Acao acao) {
         Acao novaAcao = acaoService.salvar(acao);
-        return new ResponseEntity<>(novaAcao, HttpStatus.CREATED);
+        
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(novaAcao.getId())
+                .toUri();
+                
+        return ResponseEntity.created(location).body(novaAcao);
     }
 
     @PutMapping("/{id}")

@@ -1,42 +1,38 @@
 package br.edu.infnet.hanielapi.service;
 
-import br.edu.infnet.hanielapi.config.IdGenerator;
 import br.edu.infnet.hanielapi.exception.AtivoInvalidoException;
 import br.edu.infnet.hanielapi.exception.AtivoNaoEncontradoException;
 import br.edu.infnet.hanielapi.model.Acao;
+import br.edu.infnet.hanielapi.repository.AcaoRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AcaoService implements CrudService<Acao, Long> {
 
-    private final Map<Long, Acao> acoes = new ConcurrentHashMap<>();
-    private final IdGenerator idGenerator;
+    private final AcaoRepository acaoRepository;
 
-    public AcaoService(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    public AcaoService(AcaoRepository acaoRepository) {
+        this.acaoRepository = acaoRepository;
     }
 
     private Acao encontrarPorIdOuLancarExcecao(Long id) {
-        return Optional.ofNullable(acoes.get(id))
+        return acaoRepository.findById(id)
                 .orElseThrow(() -> new AtivoNaoEncontradoException("Ação com ID " + id + " não encontrada."));
     }
 
     @Override
     public List<Acao> listarTodos() {
-        return new ArrayList<>(acoes.values());
+        return acaoRepository.findAll();
     }
 
     @Override
     public Optional<Acao> buscarPorId(Long id) {
-        return Optional.ofNullable(acoes.get(id));
+        return acaoRepository.findById(id);
     }
 
     @Override
@@ -44,23 +40,23 @@ public class AcaoService implements CrudService<Acao, Long> {
         if (acao.getTicker() == null || acao.getTicker().isBlank()) {
             throw new AtivoInvalidoException("O ticker da ação não pode ser vazio.");
         }
-        acao.setId(idGenerator.getNextId());
-        acoes.put(acao.getId(), acao);
-        return acao;
+        
+        return acaoRepository.save(acao);
     }
 
     @Override
     public Acao alterar(Long id, Acao acaoParaAlterar) {
-        Acao acaoExistente = encontrarPorIdOuLancarExcecao(id);
-        acaoParaAlterar.setId(id); 
-        acoes.put(id, acaoParaAlterar);
-        return acaoParaAlterar;
+        encontrarPorIdOuLancarExcecao(id);
+        
+        acaoParaAlterar.setId(id);
+
+        return acaoRepository.save(acaoParaAlterar);
     }
 
     @Override
     public void excluir(Long id) {
         encontrarPorIdOuLancarExcecao(id);
-        acoes.remove(id);
+        acaoRepository.deleteById(id);
     }
     
     public Acao desdobrar(Long id, int fator) {
@@ -68,11 +64,12 @@ public class AcaoService implements CrudService<Acao, Long> {
         if (fator <= 1) {
             throw new AtivoInvalidoException("O fator de split deve ser maior que 1.");
         }
+        
         int novaQuantidade = acao.getQuantidade() * fator;
         BigDecimal novoPrecoMedio = acao.getPrecoMedio().divide(new BigDecimal(fator), 2, RoundingMode.HALF_UP);
         acao.setQuantidade(novaQuantidade);
         acao.setPrecoMedio(novoPrecoMedio);
-        acoes.put(id, acao);
-        return acao;
+        
+        return acaoRepository.save(acao);
     }
 }

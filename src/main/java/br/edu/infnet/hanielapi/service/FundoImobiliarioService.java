@@ -1,41 +1,37 @@
 package br.edu.infnet.hanielapi.service;
 
-import br.edu.infnet.hanielapi.config.IdGenerator;
 import br.edu.infnet.hanielapi.exception.AtivoInvalidoException;
 import br.edu.infnet.hanielapi.exception.AtivoNaoEncontradoException;
 import br.edu.infnet.hanielapi.model.FundoImobiliario;
+import br.edu.infnet.hanielapi.repository.FundoImobiliarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class FundoImobiliarioService implements CrudService<FundoImobiliario, Long> {
     
-    private final Map<Long, FundoImobiliario> fiis = new ConcurrentHashMap<>();
-    private final IdGenerator idGenerator;
+    private final FundoImobiliarioRepository fiiRepository;
 
-    public FundoImobiliarioService(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
+    public FundoImobiliarioService(FundoImobiliarioRepository fiiRepository) {
+        this.fiiRepository = fiiRepository;
     }
 
     private FundoImobiliario encontrarPorIdOuLancarExcecao(Long id) {
-        return Optional.ofNullable(fiis.get(id))
+        return fiiRepository.findById(id)
                 .orElseThrow(() -> new AtivoNaoEncontradoException("FII com ID " + id + " não encontrado."));
     }
 
     @Override
     public List<FundoImobiliario> listarTodos() {
-        return new ArrayList<>(fiis.values());
+        return fiiRepository.findAll();
     }
 
     @Override
     public Optional<FundoImobiliario> buscarPorId(Long id) {
-        return Optional.ofNullable(fiis.get(id));
+        return fiiRepository.findById(id);
     }
 
     @Override
@@ -43,23 +39,21 @@ public class FundoImobiliarioService implements CrudService<FundoImobiliario, Lo
         if (fii.getCodigo() == null || fii.getCodigo().isBlank()) {
             throw new AtivoInvalidoException("O código do FII não pode ser vazio.");
         }
-        fii.setId(idGenerator.getNextId());
-        fiis.put(fii.getId(), fii);
-        return fii;
+        
+        return fiiRepository.save(fii);
     }
 
     @Override
     public FundoImobiliario alterar(Long id, FundoImobiliario fiiParaAlterar) {
-        FundoImobiliario fiiExistente = encontrarPorIdOuLancarExcecao(id);
+        encontrarPorIdOuLancarExcecao(id);
         fiiParaAlterar.setId(id);
-        fiis.put(id, fiiParaAlterar);
-        return fiiParaAlterar;
+        return fiiRepository.save(fiiParaAlterar);
     }
 
     @Override
     public void excluir(Long id) {
         encontrarPorIdOuLancarExcecao(id);
-        fiis.remove(id);
+        fiiRepository.deleteById(id);
     }
     
     public FundoImobiliario atualizarValorPatrimonial(Long id, BigDecimal novoValor) {
@@ -67,8 +61,9 @@ public class FundoImobiliarioService implements CrudService<FundoImobiliario, Lo
         if (novoValor.compareTo(BigDecimal.ZERO) < 0) {
             throw new AtivoInvalidoException("O valor patrimonial não pode ser negativo.");
         }
+        
         fii.setValorPatrimonialPorCota(novoValor);
-        fiis.put(id, fii);
-        return fii;
+        
+        return fiiRepository.save(fii);
     }
 }
