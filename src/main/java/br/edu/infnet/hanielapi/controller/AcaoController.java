@@ -26,8 +26,8 @@ public class AcaoController {
     @GetMapping("/{id}")
     public ResponseEntity<Acao> buscarAcaoPorId(@PathVariable Long id) {
         return acaoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping

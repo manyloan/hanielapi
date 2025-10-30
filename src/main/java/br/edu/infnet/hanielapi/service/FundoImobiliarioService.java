@@ -62,7 +62,6 @@ public class FundoImobiliarioService implements CrudService<FundoImobiliario, Lo
         fiis.remove(id);
     }
     
-    // MÉTODO EXTRA E ESPECÍFICO PARA FII
     public FundoImobiliario atualizarValorPatrimonial(Long id, BigDecimal novoValor) {
         FundoImobiliario fii = encontrarPorIdOuLancarExcecao(id);
         if (novoValor.compareTo(BigDecimal.ZERO) < 0) {

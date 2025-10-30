@@ -52,7 +52,7 @@ public class AcaoService implements CrudService<Acao, Long> {
     @Override
     public Acao alterar(Long id, Acao acaoParaAlterar) {
         Acao acaoExistente = encontrarPorIdOuLancarExcecao(id);
-        acaoParaAlterar.setId(id); // Garante que o ID não seja alterado
+        acaoParaAlterar.setId(id); 
         acoes.put(id, acaoParaAlterar);
         return acaoParaAlterar;
     }
@@ -63,7 +63,6 @@ public class AcaoService implements CrudService<Acao, Long> {
         acoes.remove(id);
     }
     
-    // MÉTODO EXTRA E ESPECÍFICO PARA ACAO
     public Acao desdobrar(Long id, int fator) {
         Acao acao = encontrarPorIdOuLancarExcecao(id);
         if (fator <= 1) {
