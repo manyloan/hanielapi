@@ -2,6 +2,7 @@ package br.edu.infnet.hanielapi.controller;
 
 import br.edu.infnet.hanielapi.model.Acao;
 import br.edu.infnet.hanielapi.service.AcaoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,6 +25,11 @@ public class AcaoController {
         return ResponseEntity.ok(acaoService.listarTodos());
     }
 
+    @GetMapping("/busca/por-setor")
+    public ResponseEntity<List<Acao>> buscarAcoesPorSetor(@RequestParam String setor) {
+        return ResponseEntity.ok(acaoService.listarPorSetor(setor));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Acao> buscarAcaoPorId(@PathVariable Long id) {
         return acaoService.buscarPorId(id)
@@ -32,7 +38,7 @@ public class AcaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Acao> incluirAcao(@RequestBody Acao acao) {
+    public ResponseEntity<Acao> incluirAcao(@Valid @RequestBody Acao acao) {
         Acao novaAcao = acaoService.salvar(acao);
         
         URI location = ServletUriComponentsBuilder
@@ -45,7 +51,7 @@ public class AcaoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Acao> alterarAcao(@PathVariable Long id, @RequestBody Acao acao) {
+    public ResponseEntity<Acao> alterarAcao(@PathVariable Long id, @Valid @RequestBody Acao acao) {
         Acao acaoAtualizada = acaoService.alterar(id, acao);
         return ResponseEntity.ok(acaoAtualizada);
     }

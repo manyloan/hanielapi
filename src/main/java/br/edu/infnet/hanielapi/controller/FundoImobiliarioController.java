@@ -3,10 +3,12 @@ package br.edu.infnet.hanielapi.controller;
 import br.edu.infnet.hanielapi.controller.dto.UpdateValorPatrimonialRequest;
 import br.edu.infnet.hanielapi.model.FundoImobiliario;
 import br.edu.infnet.hanielapi.service.FundoImobiliarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class FundoImobiliarioController {
     }
 
     @PostMapping
-    public ResponseEntity<FundoImobiliario> incluirFii(@RequestBody FundoImobiliario fii) {
+    public ResponseEntity<FundoImobiliario> incluirFii(@Valid @RequestBody FundoImobiliario fii) {
         FundoImobiliario novoFii = fiiService.salvar(fii);
         
         URI location = ServletUriComponentsBuilder
@@ -46,7 +48,7 @@ public class FundoImobiliarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FundoImobiliario> alterarFii(@PathVariable Long id, @RequestBody FundoImobiliario fii) {
+    public ResponseEntity<FundoImobiliario> alterarFii(@PathVariable Long id, @Valid @RequestBody FundoImobiliario fii) {
         FundoImobiliario fiiAtualizado = fiiService.alterar(id, fii);
         return ResponseEntity.ok(fiiAtualizado);
     }
@@ -63,5 +65,12 @@ public class FundoImobiliarioController {
             @RequestBody UpdateValorPatrimonialRequest request) {
         FundoImobiliario fiiAtualizado = fiiService.atualizarValorPatrimonial(id, request.getNovoValor());
         return ResponseEntity.ok(fiiAtualizado);
+    }
+
+    @GetMapping("/busca/por-segmento-e-valor")
+    public ResponseEntity<List<FundoImobiliario>> buscarFiisAvancado(
+            @RequestParam String segmento,
+            @RequestParam BigDecimal valorMin) {
+        return ResponseEntity.ok(fiiService.buscarPorSegmentoEValorMaior(segmento, valorMin));
     }
 }

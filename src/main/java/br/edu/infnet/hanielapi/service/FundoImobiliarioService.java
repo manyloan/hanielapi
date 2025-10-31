@@ -24,6 +24,10 @@ public class FundoImobiliarioService implements CrudService<FundoImobiliario, Lo
                 .orElseThrow(() -> new AtivoNaoEncontradoException("FII com ID " + id + " não encontrado."));
     }
 
+    public List<FundoImobiliario> buscarPorSegmentoEValorMaior(String segmento, BigDecimal valorMinimo) {
+        return fiiRepository.findBySegmentoIgnoreCaseAndValorPatrimonialPorCotaGreaterThan(segmento, valorMinimo);
+    }
+
     @Override
     public List<FundoImobiliario> listarTodos() {
         return fiiRepository.findAll();

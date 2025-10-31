@@ -30,6 +30,54 @@
 					"response": []
 				},
 				{
+					"name": "Buscar Ação por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acoes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incluir Nova Ação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Banco do Brasil ON\",\r\n    \"quantidade\": 400,\r\n    \"precoMedio\": 27.50,\r\n    \"ticker\": \"BBAS3\",\r\n    \"empresa\": {\r\n        \"nome\": \"Banco do Brasil S.A.\",\r\n        \"setor\": \"Financeiro\",\r\n        \"cnpj\": \"00.000.000/0001-91\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/acoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Alterar Ação Existente",
 					"request": {
 						"method": "PUT",
@@ -103,6 +151,219 @@
 								{
 									"key": "fator",
 									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por Setor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/acoes/busca/por-setor?setor=Varejo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"busca",
+								"por-setor"
+							],
+							"query": [
+								{
+									"key": "setor",
+									"value": "Varejo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FIIs",
+			"item": [
+				{
+					"name": "Listar Todos FIIs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fiis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar FII por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fiis/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incluir Novo FII",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"XP Malls FII\",\r\n    \"quantidade\": 150,\r\n    \"precoMedio\": 112.80,\r\n    \"codigo\": \"XPML11\",\r\n    \"segmento\": \"Shoppings\",\r\n    \"valorPatrimonialPorCota\": 110.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/fiis",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar FII Existente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Maxi Renda FII Alterado\",\r\n    \"quantidade\": 400,\r\n    \"precoMedio\": 10.90,\r\n    \"codigo\": \"MXRF11\",\r\n    \"segmento\": \"Papel\",\r\n    \"valorPatrimonialPorCota\": 10.25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/acoes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"acoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir FII",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Petrobras PN Alterada\",\r\n    \"quantidade\": 300,\r\n    \"precoMedio\": 32.00,\r\n    \"ticker\": \"PETR4\",\r\n    \"empresa\": {\r\n        \"nome\": \"Petróleo Brasileiro S.A.\",\r\n        \"setor\": \"Petróleo e Gás\",\r\n        \"cnpj\": \"33.000.167/0001-01\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/fiis/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Valor Patrimonial do FII",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novoValor\": 10.33\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/fiis/16/atualizar-valor-patrimonial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis",
+								"16",
+								"atualizar-valor-patrimonial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por Segmento e Valor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/fiis/busca/por-segmento-e-valor?segmento=Papel&valorMin=10.50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fiis",
+								"busca",
+								"por-segmento-e-valor"
+							],
+							"query": [
+								{
+									"key": "segmento",
+									"value": "Papel"
+								},
+								{
+									"key": "valorMin",
+									"value": "10.50"
 								}
 							]
 						}

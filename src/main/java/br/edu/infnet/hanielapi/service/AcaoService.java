@@ -20,6 +20,15 @@ public class AcaoService implements CrudService<Acao, Long> {
         this.acaoRepository = acaoRepository;
     }
 
+    public Acao buscarPorTicker(String ticker) {
+        return acaoRepository.findByTicker(ticker)
+                .orElseThrow(() -> new AtivoNaoEncontradoException("Ação com ticker " + ticker + " não encontrada."));
+    }
+
+    public List<Acao> listarPorSetor(String setor) {
+        return acaoRepository.findByEmpresaSetorIgnoreCase(setor);
+    }
+
     private Acao encontrarPorIdOuLancarExcecao(Long id) {
         return acaoRepository.findById(id)
                 .orElseThrow(() -> new AtivoNaoEncontradoException("Ação com ID " + id + " não encontrada."));

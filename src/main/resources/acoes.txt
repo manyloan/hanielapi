@@ -1,10 +1,10 @@
-PETR4,Petrobras PN,250,31.50,Petróleo Brasileiro S.A.,Petróleo e Gás,33.000.167/0001-01
+PETR4,Petrobras PN,250,31.50,Petroleo Brasileiro S.A.,Petróleo e Gás,33.000.167/0001-01
 VALE3,Vale ON,120,68.20,Vale S.A.,Mineração,33.592.510/0001-54
 ITUB4,Itaú Unibanco PN,600,30.10,Itaú Unibanco Holding S.A.,Financeiro,60.701.190/0001-04
 MGLU3,Magazine Luiza ON,1500,2.05,Magazine Luiza S.A.,Varejo,47.960.950/0001-21
 WEGE3,Weg ON,300,39.80,WEG S.A.,Bens de Capital,84.429.695/0001-11
 BBDC4,Bradesco PN,550,16.20,Banco Bradesco S.A.,Financeiro,60.746.948/0001-12
 ABEV3,Ambev ON,700,13.85,Ambev S.A.,Bebidas,07.526.557/0001-00
-B3SA3,B3 ON,400,14.50,B3 S.A. - Brasil, Bolsa, Balcão,Serviços Financeiros,09.346.601/0001-25
+B3SA3,B3 ON,400,14.50,B3 S.A. - Brasil Bolsa Balcao,Serviços Financeiros,09.346.601/0001-25
 LREN3,Lojas Renner ON,280,18.15,Lojas Renner S.A.,Varejo,92.754.738/0001-62
-ELET3,Eletrobras ON,180,43.50,Centrais Elétricas Brasileiras S.A.,Elétrico,00.001.180/0001-26
+ELET3,Eletrobras ON,180,43.50,Centrais Eletricas Brasileiras S.A.,Elétrico,00.001.180/0001-26
